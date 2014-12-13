@@ -29,3 +29,8 @@ list available sites
 
 ## nginx-list-enabled
 list enabled sites
+
+TODO
+====
+
+- use a system-variable instead of hardcoded path to nginx
