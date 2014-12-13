@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ ! $1 ];
+then
+  echo "Syntax: $0 <enabled site>"
+  exit
+fi
+
+FILE_NAME=$1
+FILE=/etc/nginx/sites-enabled/$FILE_NAME
+
+if [ -f $FILE ];
+then
+  echo "Disabling $FILE_NAME..."
+  rm $FILE
+  nginx-reload > /dev/null
+  echo "Successfully disabled $FILE_NAME!"
+else
+  echo "Site $FILE_NAME is not enabled"
+fi

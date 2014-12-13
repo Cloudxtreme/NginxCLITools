@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ ! $1 ];
+then
+  echo "Syntax: $0 <sitename>"
+  exit
+fi
+
+
+FILE_NAME=$1
+FILE=/etc/nginx/sites-available/$FILE_NAME
+
+
+if [ -f $FILE ];
+then
+  if [ -f /etc/nginx/sites-enabled/$FILE_NAME ];
+  then
+    echo "$FILE_NAME is already enabled!"
+    exit
+  fi
+  echo "Enabling $FILE_NAME..."
+  ln -s $FILE /etc/nginx/sites-enabled/$FILE_NAME
+  nginx-reload > /dev/null
+  echo "Successfully enabled $FILE_NAME!"
+else
+  echo "Site $FILE_NAME does not exist"
+fi
